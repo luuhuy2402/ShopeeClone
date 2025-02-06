@@ -1,28 +1,39 @@
 import { Link } from "react-router-dom";
+import { Product as ProductType } from "../../../types/product.type";
+import {
+    formatCurrency,
+    formatNumberToSocialStyle,
+} from "../../../utils/utils";
 
-export default function Product() {
+interface Props {
+    product: ProductType;
+}
+export default function Product({ product }: Props) {
     return (
         <Link to="/">
             <div className="bg-white shadow rounded-sm hover:translate-y-[-0.04rem] hover:shadow-md duration-100 transition-transform overflow-hidden">
                 <div className="w-full pt-[100%] relative">
                     <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lob6z4s8xrwrf5_tn.webp"
-                        alt=""
+                        src={product.image}
+                        alt={product.name}
                         className="absolute top-0 left-0 bg-white w-full h-full object-cover"
                     />
                 </div>
                 <div className=" p-2 overflow-hidden">
                     <div className="min-h-[2rem] line-clamp-2 text-xs">
-                        Quần joger gân tăm unisex quần bom ống rộng chất liệu nỉ
-                        tăm dày dặn chun gấu mặc tôn dáng
+                        {product.name}
                     </div>
                     <div className="flex items-center mt-3 text-orange">
-                        <div className="text-orange truncate ">
+                        <div className="text-orange ">
                             <span className="text-xs">₫</span>
-                            <span>39.000</span>
+                            {/* <span>{product.price}</span> */}
+                            <span>{formatCurrency(product.price)}</span>
                         </div>
-                        <div className=" max-w-[50%] truncate bg-[#feeeea] text-[0.625rem] py-[0.5] px-1 ml-2 rounded-sm">
-                            <span className="text-xs">-61%</span>
+                        <div className=" max-w-[50%] truncate bg-[#feeeea] text-[0.625rem] py-[0.5] px-1 ml-2 rounded-sm text-gray-500 line-through">
+                            <span className="text-xs">
+                                {/* {product.price_before_discount} */}₫
+                                {formatCurrency(product.price_before_discount)}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -38,7 +49,8 @@ export default function Product() {
                     </div>
                     <div className="ml-1 h-3 border-l border-gray-200"></div>
                     <div className="truncate text-xs min-h-4 ml-1">
-                        Đã bán 1,9k
+                        {/* Đã bán {product.sold} */}
+                        Đã bán {formatNumberToSocialStyle(product.sold)}
                     </div>
                 </div>
             </div>
