@@ -45,7 +45,10 @@ export default function Product({ product }: Props) {
                             height="10"
                             alt="rating-star-full"
                         />
-                        <div className="ml-1 text-xs">4.6</div>
+                        <div className="ml-1 text-xs">
+                            {/* {product.rating} */}
+                            {parseFloat(product.rating.toFixed(1))}
+                        </div>
                     </div>
                     <div className="ml-1 h-3 border-l border-gray-200"></div>
                     <div className="truncate text-xs min-h-4 ml-1">
